@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
 	return (
-		<div className="relative h-screen bg-white">
+		<div className="relative h-screen bg-gray-50">
 			<div className="pb-80 pt-2 sm:pb-40 sm:pt-10 lg:pb-20 lg:pt-10">
 				<div className="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 sm:static sm:px-6 lg:flex-row lg:px-8">
 					<div className="sm:max-w-lg ">
@@ -27,11 +27,6 @@ export default function Home() {
 					<div className="mt-10 flex h-full w-full ">
 						<div className="grid h-full w-full  grid-cols-2 gap-2 md:grid-cols-3 md:gap-2">
 							<div className="relative flex items-center justify-center ">
-								{/* <img
-                  src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
-                  alt=""
-                  className="object-cover h-64 w-44 rounded-md overflow-hidden "
-                /> */}
 								<div className="h-64 w-44">
 									<Image
 										src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
