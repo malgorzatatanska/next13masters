@@ -11,9 +11,9 @@ export default function Home() {
 					<div className="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 sm:static sm:px-6 lg:flex-row lg:px-8">
 						<div className="sm:max-w-lg ">
 							<h1 className="font text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-								Twoje Źródło Pielęgnacji i Urody Online
+								Nowa kolekcja jesienna juz w sprzedaży
 							</h1>
-							<p className="mt-4 text-xl text-gray-500">
+							<p className="mt-6 text-xl text-gray-500">
 								This year, our new summer collection will shelter you
 								from the harsh elements of a world that doesnt care if
 								you live or die.
@@ -21,7 +21,7 @@ export default function Home() {
 							<div>
 								<Link
 									href="/products"
-									className="mt-5 inline-block rounded-md border border-transparent bg-pink-600 px-10 py-3 text-center font-medium tracking-wide text-white hover:bg-pink-700"
+									className="mt-6 inline-block rounded-md border border-transparent bg-indigo-600 px-10 py-3 text-center font-medium tracking-wide text-white hover:bg-indigo-700"
 								>
 									Przeglądaj
 								</Link>
@@ -67,10 +67,7 @@ export default function Home() {
 										height={256}
 									/>
 								</div>
-							</div>
-							{/* this part is visible from md  */}
-							<div className="hidden md:flex md:flex-col md:gap-2">
-								<div className="md:flex md:items-center md:justify-center ">
+								<div className="flex items-center justify-center md:hidden">
 									<Image
 										src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
 										alt="nasz sklep"
@@ -78,7 +75,7 @@ export default function Home() {
 										height={256}
 									/>
 								</div>
-								<div className="md:flex md:items-center md:justify-center md:gap-2">
+								<div className="flex md:items-center md:justify-center ">
 									<Image
 										src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
 										alt="nasz sklep"
@@ -86,31 +83,6 @@ export default function Home() {
 										height={256}
 									/>
 								</div>
-							</div>
-							{/* This part is visible only for sm to md */}
-							<div className="flex md:hidden ">
-								<Image
-									src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
-									alt="nasz sklep"
-									width={176}
-									height={256}
-								/>
-							</div>
-							<div className="flex items-center justify-center md:hidden">
-								<Image
-									src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
-									alt="nasz sklep"
-									width={176}
-									height={256}
-								/>
-							</div>
-							<div className="flex md:items-center md:justify-center ">
-								<Image
-									src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
-									alt="nasz sklep"
-									width={176}
-									height={256}
-								/>
 							</div>
 						</div>
 					</div>
