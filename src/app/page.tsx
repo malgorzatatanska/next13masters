@@ -47,10 +47,7 @@ const products: ProductItemType[] = [
 export default function Home() {
 	return (
 		<section className="min-h-screen bg-gray-100">
-			<section
-				className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
-				data-testid="products-list"
-			>
+			<section className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 				<ProductList products={products} />
 			</section>
 		</section>
