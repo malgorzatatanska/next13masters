@@ -11,7 +11,7 @@ export default function Home() {
 					<div className="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 sm:static sm:px-6 lg:flex-row lg:px-8">
 						<div className="sm:max-w-lg ">
 							<h1 className="font text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-								Nowa kolekcja jesienna juz w sprzedaży
+								Twoje Źródło Pielęgnacji i Urody Online
 							</h1>
 							<p className="mt-6 text-xl text-gray-500">
 								This year, our new summer collection will shelter you
@@ -21,7 +21,7 @@ export default function Home() {
 							<div>
 								<Link
 									href="/products"
-									className="mt-6 inline-block rounded-md border border-transparent bg-indigo-600 px-10 py-3 text-center font-medium tracking-wide text-white hover:bg-indigo-700"
+									className="mt-6 inline-block rounded-md border border-transparent bg-pink-600 px-10 py-3 text-center font-medium tracking-wide text-white hover:bg-pink-700"
 								>
 									Przeglądaj
 								</Link>
@@ -29,7 +29,7 @@ export default function Home() {
 						</div>
 						<div className="mt-10 flex h-full w-full ">
 							<div className="grid h-full w-full  grid-cols-2 gap-2 md:grid-cols-3 md:gap-2">
-								<div className="relative flex items-center justify-center ">
+								<div className="relative flex items-center justify-center">
 									<div className="h-64 w-44">
 										<Image
 											src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
