@@ -43,7 +43,7 @@ export default async function Product({
 				<SingleProduct product={product} />
 			</div>
 			<aside>
-				<Suspense>
+				<Suspense fallback="Loading ...">
 					<div className="mx-auto max-w-2xl">
 						<SuggestedProductsList />
 					</div>
