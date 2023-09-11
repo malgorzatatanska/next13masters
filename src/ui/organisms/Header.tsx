@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { ActiveLink } from "../atoms/ActiveLink";
 
 export const Header = () => {
 	return (
-		<header className="bg-gray-50">
+		<header className=" bg-white">
 			<div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 				<div className="flex h-16 items-center justify-between">
 					<div className="md:flex md:items-center md:gap-12">
@@ -26,57 +27,11 @@ export const Header = () => {
 						<nav aria-label="Global">
 							<ul className="flex items-center gap-6 text-sm">
 								<li>
-									<a
-										className="text-gray-500 transition hover:text-gray-500/75"
-										href="/"
-									>
-										O nas
-									</a>
+									<ActiveLink href="/" name="Home" />
 								</li>
 
 								<li>
-									<Link
-										className="text-gray-500 transition hover:text-gray-500/75"
-										href="/products"
-									>
-										Produkty
-									</Link>
-								</li>
-
-								<li>
-									<a
-										className="text-gray-500 transition hover:text-gray-500/75"
-										href="/"
-									>
-										Porady
-									</a>
-								</li>
-
-								<li>
-									<a
-										className="text-gray-500 transition hover:text-gray-500/75"
-										href="/"
-									>
-										Kontakt
-									</a>
-								</li>
-
-								<li>
-									<a
-										className="text-gray-500 transition hover:text-gray-500/75"
-										href="/"
-									>
-										Kariera
-									</a>
-								</li>
-
-								<li>
-									<a
-										className="text-gray-500 transition hover:text-gray-500/75"
-										href="/"
-									>
-										Blog
-									</a>
+									<ActiveLink href="/products" name="All" />
 								</li>
 							</ul>
 						</nav>
@@ -84,20 +39,20 @@ export const Header = () => {
 
 					<div className="flex items-center gap-4">
 						<div className="sm:flex sm:gap-4">
-							<a
+							<Link
 								className="rounded-md bg-pink-300 px-5 py-2.5 text-sm font-medium text-white shadow"
 								href="/"
 							>
 								Login
-							</a>
+							</Link>
 
 							<div className="hidden sm:flex">
-								<a
+								<Link
 									className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-pink-300"
 									href="/"
 								>
 									Register
-								</a>
+								</Link>
 							</div>
 						</div>
 
@@ -109,11 +64,11 @@ export const Header = () => {
 									fill="none"
 									viewBox="0 0 24 24"
 									stroke="currentColor"
-									stroke-width="2"
+									strokeWidth="2"
 								>
 									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
+										strokeLinecap="round"
+										strokeLinejoin="round"
 										d="M4 6h16M4 12h16M4 18h16"
 									/>
 								</svg>
