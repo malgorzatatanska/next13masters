@@ -30,7 +30,7 @@ export const Header = () => {
 									<ActiveLink
 										href="/"
 										className="text-gray-500 transition hover:text-gray-500/75"
-										activeClassName="underline"
+										activeClassName="border-b-2 border-b-pink-500"
 										exact
 									>
 										Home
@@ -41,8 +41,8 @@ export const Header = () => {
 									<ActiveLink
 										href="/products"
 										className="text-gray-500 transition hover:text-gray-500/75"
-										activeClassName="underline"
-										exact
+										activeClassName="border-b-2 border-b-pink-500"
+										exact={false}
 									>
 										All
 									</ActiveLink>

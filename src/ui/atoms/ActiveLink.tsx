@@ -20,9 +20,11 @@ export const ActiveLink = <T extends string>({
 	const pathname = usePathname();
 	const paths = pathname.split("/");
 
+	const hrefWithoutSlashes = href.replace(/\//g, "");
+
 	const isActive = exact
 		? pathname === href
-		: paths.includes(href as string);
+		: paths.includes(hrefWithoutSlashes);
 
 	return (
 		<Link
