@@ -3,9 +3,28 @@ import {
 	type ProductItemType,
 } from "@/ui/types";
 
-export const getProductsList = async () => {
+export const getProductById = async (
+	id: ProductResponseItemType["id"],
+) => {
 	const res = await fetch(
-		"https://naszsklep-api.vercel.app/api/products",
+		`https://naszsklep-api.vercel.app/api/products/${id}`,
+	);
+
+	const productResponse =
+		(await res.json()) as ProductResponseItemType;
+
+	return productResponseItemToProductItemType(productResponse);
+};
+
+export const getProductsList = async ({
+	take,
+	offset,
+}: {
+	take?: string;
+	offset?: string;
+}) => {
+	const res = await fetch(
+		`https://naszsklep-api.vercel.app/api/products?take=${take}&offset=${offset}`,
 	);
 
 	const productsResponse =
@@ -18,19 +37,6 @@ export const getProductsList = async () => {
 	);
 
 	return products;
-};
-
-export const getProductById = async (
-	id: ProductResponseItemType["id"],
-) => {
-	const res = await fetch(
-		`https://naszsklep-api.vercel.app/api/products/${id}`,
-	);
-
-	const productResponse =
-		(await res.json()) as ProductResponseItemType;
-
-	return productResponseItemToProductItemType(productResponse);
 };
 
 const productResponseItemToProductItemType = (

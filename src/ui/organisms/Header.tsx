@@ -27,11 +27,25 @@ export const Header = () => {
 						<nav aria-label="Global">
 							<ul className="flex items-center gap-6 text-sm">
 								<li>
-									<ActiveLink href="/" name="Home" />
+									<ActiveLink
+										href="/"
+										className="text-gray-500 transition hover:text-gray-500/75"
+										activeClassName="underline"
+										exact
+									>
+										Home
+									</ActiveLink>
 								</li>
 
 								<li>
-									<ActiveLink href="/products" name="All" />
+									<ActiveLink
+										href="/products"
+										className="text-gray-500 transition hover:text-gray-500/75"
+										activeClassName="underline"
+										exact
+									>
+										All
+									</ActiveLink>
 								</li>
 							</ul>
 						</nav>

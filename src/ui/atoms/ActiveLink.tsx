@@ -6,24 +6,30 @@ import type { Route } from "next";
 
 export const ActiveLink = <T extends string>({
 	href,
-	name,
+	children,
+	className,
+	activeClassName,
+	exact,
 }: {
-	href: Route<T> | URL;
-	name: string;
+	href: Route<T>;
+	children?: React.ReactNode;
+	className: string;
+	activeClassName: string;
+	exact?: boolean;
 }) => {
 	const pathname = usePathname();
+	const paths = pathname.split("/");
 
-	const isActive = pathname === href;
+	const isActive = exact
+		? pathname === href
+		: paths.includes(href as string);
 
 	return (
 		<Link
-			className={clsx(
-				`text-gray-500 transition hover:text-gray-500/75`,
-				isActive && `underline `,
-			)}
+			className={clsx(className, isActive && activeClassName)}
 			href={href as Route}
 		>
-			{name}
+			{children}
 		</Link>
 	);
 };
