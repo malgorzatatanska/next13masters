@@ -2,6 +2,19 @@ import { getProductsList } from "@/api/products";
 import { numberOfProductsOnThePage } from "@/ui/consts";
 import { ProductList } from "@/ui/organisms/ProductList";
 
+export const generateStaticParams = async () => {
+	const products = await getProductsList({});
+	const pages = Math.ceil(
+		products.length / Number(numberOfProductsOnThePage),
+	);
+
+	const pagesList = Array.from({ length: pages }, (_, i) => ({
+		page: (i + 1).toString(),
+	}));
+
+	return [pagesList];
+};
+
 export default async function ProductsPage({
 	params,
 }: {

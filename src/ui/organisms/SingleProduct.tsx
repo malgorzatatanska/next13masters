@@ -27,9 +27,8 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
 					<div className="font pb-5 text-4xl text-gray-600 lg:text-5xl ">
 						{formatMoney(product.price)}
 					</div>
-					{/* <div>Rating</div> */}
 					<div className="font pb-5 text-2xl leading-snug tracking-wide text-gray-500 lg:text-xl">
-						Future desc
+						{product.description}
 					</div>
 					<article className="prose lg:prose-xl">opis</article>
 				</div>
