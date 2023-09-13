@@ -1,12 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Header } from "@/ui/organisms/Header";
 
 export default function Home() {
 	return (
 		<>
-			<Header />
-			<div className="relative h-screen bg-gray-50">
+			<div className="relative  bg-gray-50">
 				<div className="pb-80 pt-2 sm:pb-40 sm:pt-10 lg:pb-20 lg:pt-10">
 					<div className="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 sm:static sm:px-6 lg:flex-row lg:px-8">
 						<div className="sm:max-w-lg ">
