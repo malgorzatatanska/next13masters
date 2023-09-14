@@ -4,6 +4,13 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import type { Route } from "next";
 
+const removeLeadingSlash = (str: string) => {
+	if (str.charAt(0) === "/") {
+		return str.slice(1);
+	}
+	return str;
+};
+
 export const ActiveLink = <T extends string>({
 	href,
 	children,
@@ -20,11 +27,9 @@ export const ActiveLink = <T extends string>({
 	const pathname = usePathname();
 	const paths = pathname.split("/");
 
-	const hrefWithoutSlashes = href.replace(/\//g, "");
-
 	const isActive = exact
 		? pathname === href
-		: paths.includes(hrefWithoutSlashes);
+		: paths.includes(removeLeadingSlash(href));
 
 	return (
 		<Link

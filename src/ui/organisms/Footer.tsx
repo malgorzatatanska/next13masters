@@ -394,7 +394,7 @@ export const Footer = () => {
 
 							<Link
 								className="inline-block text-pink-600 underline transition hover:text-pink-600/75"
-								href="/"
+								href="/regulamin"
 							>
 								Terms & Conditions
 							</Link>
@@ -403,7 +403,7 @@ export const Footer = () => {
 
 							<Link
 								className="inline-block text-pink-600 underline transition hover:text-pink-600/75"
-								href="/"
+								href="/polityka-prywatnosci"
 							>
 								Privacy Policy
 							</Link>
