@@ -12,7 +12,10 @@ export const Pagination = async () => {
 
 	return (
 		<>
-			<div className="flex flex-row items-center justify-center  align-middle">
+			<div
+				aria-label="Pagination"
+				className="flex flex-row items-center justify-center  align-middle"
+			>
 				<div className="cursor-pointer">
 					<FaAngleLeft />
 				</div>

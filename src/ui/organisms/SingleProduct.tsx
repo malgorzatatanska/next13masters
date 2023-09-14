@@ -21,9 +21,9 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
 			</div>
 			<div className="flex w-full flex-col px-10 lg:w-1/2 ">
 				<div>
-					<div className="font py-5 text-5xl font-bold text-gray-900 lg:pt-0 lg:text-6xl">
+					<h1 className="font py-5 text-5xl font-bold text-gray-900 lg:pt-0 lg:text-6xl">
 						{product.name}
-					</div>
+					</h1>
 					<div className="font pb-5 text-4xl text-gray-600 lg:text-5xl ">
 						{formatMoney(product.price)}
 					</div>
