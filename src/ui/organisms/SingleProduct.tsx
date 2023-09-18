@@ -12,7 +12,7 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
 				<div className="relative h-52 w-52 border-8 border-white lg:h-96 lg:w-96">
 					<img
 						src={
-							`https://api.hyperfunctor.com${product.images?.data[0]?.attributes?.url}` ||
+							`${process.env.SERVER_URL}${product.images?.data[0]?.attributes?.url}` ||
 							""
 						}
 						width={product.images?.data[0]?.attributes?.width || ""}

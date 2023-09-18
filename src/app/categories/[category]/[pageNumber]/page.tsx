@@ -7,7 +7,10 @@ export default async function CategoryProductPage({
 }: {
 	params: { category: string; pageNumber: string };
 }) {
-	const products = await getProductByCategorySlug(params.category);
+	const products = await getProductByCategorySlug(
+		params.category,
+		params.pageNumber,
+	);
 	if (!products) {
 		throw notFound();
 	}

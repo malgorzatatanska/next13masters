@@ -1,6 +1,7 @@
 import { loadEnvConfig } from "@next/env";
 import { executeGraphql } from "./graphqlApi";
 import {
+	CountCategoryProductsCountDocument,
 	GetProductByIdDocument,
 	GetProductListDocument,
 	ProductsCountDocument,
@@ -19,6 +20,7 @@ export const getProductById = async (productId: string) => {
 
 export const getProductByCategorySlug = async (
 	categorySlug: string,
+	page: string,
 ) => {
 	const categories = await executeGraphql(
 		ProductsGetByCategorySlugDocument,
@@ -27,6 +29,10 @@ export const getProductByCategorySlug = async (
 				slug: {
 					eq: categorySlug,
 				},
+			},
+			pagination: {
+				page: Number(page),
+				pageSize: 4,
 			},
 		},
 	);
@@ -41,6 +47,26 @@ export const getProductsCount = async (): Promise<number> => {
 	);
 
 	return productCount.products?.meta.pagination.total || 0;
+};
+
+export const getCategoryProductsCount = async (
+	slug: string,
+): Promise<number> => {
+	const productsCount = await executeGraphql(
+		CountCategoryProductsCountDocument,
+		{
+			filters: {
+				slug: {
+					eq: slug,
+				},
+			},
+		},
+	);
+
+	return (
+		productsCount.categories?.data[0]?.attributes?.products?.data
+			?.length || 0
+	);
 };
 
 export const getProductsList = async (pageNumber: string) => {

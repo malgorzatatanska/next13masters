@@ -8,7 +8,7 @@ export const ProductCoverImage = ({
 	return (
 		<div className="aspect-square cursor-pointer overflow-hidden rounded-md border  bg-slate-50 hover:bg-slate-100">
 			<img
-				src={`https://api.hyperfunctor.com${src}`}
+				src={`${process.env.SERVER_URL}${src}`}
 				width="320"
 				height="320"
 				alt={alt}

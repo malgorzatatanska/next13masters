@@ -1514,6 +1514,13 @@ export type UsersPermissionsUserRelationResponseCollection = {
 
 export type CategoryListProductItemFragmentFragment = { attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null };
 
+export type CountCategoryProductsCountQueryVariables = Exact<{
+  filters?: InputMaybe<CategoryFiltersInput>;
+}>;
+
+
+export type CountCategoryProductsCountQuery = { categories?: { data: Array<{ attributes?: { products?: { data: Array<{ id?: string | null }> } | null } | null }> } | null };
+
 export type GetProductByIdQueryVariables = Exact<{
   productId?: InputMaybe<Scalars['ID']['input']>;
   pagination?: InputMaybe<PaginationArg>;
@@ -1537,11 +1544,12 @@ export type ProductsCountQueryVariables = Exact<{ [key: string]: never; }>;
 export type ProductsCountQuery = { products?: { meta: { pagination: { total: number } } } | null };
 
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
-  filters?: InputMaybe<CategoryFiltersInput>;
+  filters: CategoryFiltersInput;
+  pagination?: InputMaybe<PaginationArg>;
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { categories?: { data: Array<{ attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null }> } | null };
+export type ProductsGetByCategorySlugQuery = { categories?: { data: Array<{ id?: string | null, attributes?: { name: string, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null }> } | null };
 
 export type SingleProductFragmentFragment = { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null };
 
@@ -1661,6 +1669,21 @@ export const SingleProductFragmentFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"SingleProductFragment"}) as unknown as TypedDocumentString<SingleProductFragmentFragment, unknown>;
+export const CountCategoryProductsCountDocument = new TypedDocumentString(`
+    query CountCategoryProductsCount($filters: CategoryFiltersInput) {
+  categories(filters: $filters) {
+    data {
+      attributes {
+        products {
+          data {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CountCategoryProductsCountQuery, CountCategoryProductsCountQueryVariables>;
 export const GetProductByIdDocument = new TypedDocumentString(`
     query GetProductById($productId: ID, $pagination: PaginationArg) {
   product(id: $productId) {
@@ -1750,26 +1773,22 @@ export const ProductsCountDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<ProductsCountQuery, ProductsCountQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
-    query ProductsGetByCategorySlug($filters: CategoryFiltersInput) {
+    query ProductsGetByCategorySlug($filters: CategoryFiltersInput!, $pagination: PaginationArg) {
   categories(filters: $filters) {
     data {
-      ...CategoryListProductItemFragment
-    }
-  }
-}
-    fragment CategoryListProductItemFragment on CategoryEntity {
-  attributes {
-    name
-    slug
-    description
-    products {
-      data {
-        ...ProductListItemFragment
+      id
+      attributes {
+        name
+        products(pagination: $pagination) {
+          data {
+            ...ProductListItemFragment
+          }
+        }
       }
     }
   }
 }
-fragment ProductListItemFragment on ProductEntity {
+    fragment ProductListItemFragment on ProductEntity {
   id
   attributes {
     name
