@@ -16,7 +16,7 @@ export const ProductListItem = ({
 }: ProductListItemProps) => {
 	return (
 		<li>
-			<Link href={`/product/${product.attributes?.slug}`}>
+			<Link href={`/product/${product.id}`}>
 				<article>
 					<ProductCoverImage
 						// src={

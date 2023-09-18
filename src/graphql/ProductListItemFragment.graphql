@@ -32,6 +32,8 @@ fragment ProductListItemFragment on ProductEntity {
 		images {
 			data {
 				attributes {
+					height
+					width
 					url
 				}
 			}
@@ -40,6 +42,7 @@ fragment ProductListItemFragment on ProductEntity {
 			data {
 				attributes {
 					slug
+					name
 				}
 			}
 		}

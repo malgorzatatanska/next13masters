@@ -1,52 +1,21 @@
 import { loadEnvConfig } from "@next/env";
 import { executeGraphql } from "./graphqlApi";
 import {
+	GetProductByIdDocument,
 	GetProductListDocument,
 	ProductsCountDocument,
 	ProductsGetByCategorySlugDocument,
 } from "@/gql/graphql";
-import {
-	type ProductResponseItemType,
-	type ProductItemType,
-} from "@/ui/types";
 
 loadEnvConfig(process.cwd());
 
-export const getProductById = async (
-	id: ProductResponseItemType["id"],
-) => {
-	const res = await fetch(
-		`https://naszsklep-api.vercel.app/api/products/${id}`,
-	);
+export const getProductById = async (productId: string) => {
+	const product = await executeGraphql(GetProductByIdDocument, {
+		productId,
+	});
 
-	const productResponse =
-		(await res.json()) as ProductResponseItemType;
-
-	return productResponseItemToProductItemType(productResponse);
+	return product.product?.data?.attributes;
 };
-
-// export const getProductsList = async ({
-// 	take,
-// 	offset,
-// }: {
-// 	take?: string;
-// 	offset?: string;
-// }) => {
-// 	const res = await fetch(
-// 		`https://naszsklep-api.vercel.app/api/products?take=${take}&offset=${offset}`,
-// 	);
-
-// 	const productsResponse =
-// 		(await res.json()) as ProductResponseItemType[];
-
-// 	const products = productsResponse.map(
-// 		(product): ProductItemType => {
-// 			return productResponseItemToProductItemType(product);
-// 		},
-// 	);
-
-// 	return products;
-// };
 
 export const getProductByCategorySlug = async (
 	categorySlug: string,
@@ -92,18 +61,18 @@ export const getProductsList = async (pageNumber: string) => {
 	return graphqlResonse.products.data;
 };
 
-const productResponseItemToProductItemType = (
-	productsResponse: ProductResponseItemType,
-): ProductItemType => {
-	return {
-		id: productsResponse.id,
-		category: productsResponse.category,
-		name: productsResponse.title,
-		price: productsResponse.price,
-		coverImage: {
-			alt: productsResponse.title,
-			src: productsResponse.image,
-		},
-		description: productsResponse.description,
-	};
-};
+// const productResponseItemToProductItemType = (
+// 	productsResponse: ProductResponseItemType,
+// ): ProductItemType => {
+// 	return {
+// 		id: productsResponse.id,
+// 		category: productsResponse.category,
+// 		name: productsResponse.title,
+// 		price: productsResponse.price,
+// 		coverImage: {
+// 			alt: productsResponse.title,
+// 			src: productsResponse.image,
+// 		},
+// 		description: productsResponse.description,
+// 	};
+// };

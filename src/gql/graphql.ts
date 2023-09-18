@@ -1512,16 +1512,24 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type CategoryListProductItemFragmentFragment = { attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string } | null }> } | null } | null }> } | null } | null };
+export type CategoryListProductItemFragmentFragment = { attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null };
+
+export type GetProductByIdQueryVariables = Exact<{
+  productId?: InputMaybe<Scalars['ID']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+}>;
+
+
+export type GetProductByIdQuery = { product?: { data?: { attributes?: { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null } | null } | null } | null };
 
 export type GetProductListQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
 }>;
 
 
-export type GetProductListQuery = { products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string } | null }> } | null } | null }> } | null };
+export type GetProductListQuery = { products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null };
 
-export type ProductListItemFragmentFragment = { id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string } | null }> } | null } | null };
+export type ProductListItemFragmentFragment = { id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null };
 
 export type ProductsCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1533,7 +1541,9 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { categories?: { data: Array<{ attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string } | null }> } | null } | null }> } | null } | null }> } | null };
+export type ProductsGetByCategorySlugQuery = { categories?: { data: Array<{ attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null }> } | null };
+
+export type SingleProductFragmentFragment = { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -1560,6 +1570,8 @@ export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
     images {
       data {
         attributes {
+          height
+          width
           url
         }
       }
@@ -1568,6 +1580,7 @@ export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
       data {
         attributes {
           slug
+          name
         }
       }
     }
@@ -1597,6 +1610,8 @@ export const CategoryListProductItemFragmentFragmentDoc = new TypedDocumentStrin
     images {
       data {
         attributes {
+          height
+          width
           url
         }
       }
@@ -1605,11 +1620,90 @@ export const CategoryListProductItemFragmentFragmentDoc = new TypedDocumentStrin
       data {
         attributes {
           slug
+          name
         }
       }
     }
   }
 }`, {"fragmentName":"CategoryListProductItemFragment"}) as unknown as TypedDocumentString<CategoryListProductItemFragmentFragment, unknown>;
+export const SingleProductFragmentFragmentDoc = new TypedDocumentString(`
+    fragment SingleProductFragment on Product {
+  categories {
+    data {
+      attributes {
+        name
+        slug
+      }
+    }
+  }
+  name
+  price
+  slug
+  description
+  images {
+    data {
+      attributes {
+        url
+        height
+        width
+      }
+    }
+  }
+  reviews(pagination: $pagination) {
+    data {
+      attributes {
+        name
+        createdAt
+        content
+        rating
+      }
+    }
+  }
+}
+    `, {"fragmentName":"SingleProductFragment"}) as unknown as TypedDocumentString<SingleProductFragmentFragment, unknown>;
+export const GetProductByIdDocument = new TypedDocumentString(`
+    query GetProductById($productId: ID, $pagination: PaginationArg) {
+  product(id: $productId) {
+    data {
+      attributes {
+        ...SingleProductFragment
+      }
+    }
+  }
+}
+    fragment SingleProductFragment on Product {
+  categories {
+    data {
+      attributes {
+        name
+        slug
+      }
+    }
+  }
+  name
+  price
+  slug
+  description
+  images {
+    data {
+      attributes {
+        url
+        height
+        width
+      }
+    }
+  }
+  reviews(pagination: $pagination) {
+    data {
+      attributes {
+        name
+        createdAt
+        content
+        rating
+      }
+    }
+  }
+}`) as unknown as TypedDocumentString<GetProductByIdQuery, GetProductByIdQueryVariables>;
 export const GetProductListDocument = new TypedDocumentString(`
     query GetProductList($pagination: PaginationArg) {
   products(pagination: $pagination) {
@@ -1628,6 +1722,8 @@ export const GetProductListDocument = new TypedDocumentString(`
     images {
       data {
         attributes {
+          height
+          width
           url
         }
       }
@@ -1636,6 +1732,7 @@ export const GetProductListDocument = new TypedDocumentString(`
       data {
         attributes {
           slug
+          name
         }
       }
     }
@@ -1682,6 +1779,8 @@ fragment ProductListItemFragment on ProductEntity {
     images {
       data {
         attributes {
+          height
+          width
           url
         }
       }
@@ -1690,6 +1789,7 @@ fragment ProductListItemFragment on ProductEntity {
       data {
         attributes {
           slug
+          name
         }
       }
     }

@@ -1,0 +1,33 @@
+fragment SingleProductFragment on Product {
+	categories {
+		data {
+			attributes {
+				name
+				slug
+			}
+		}
+	}
+	name
+	price
+	slug
+	description
+	images {
+		data {
+			attributes {
+				url
+				height
+				width
+			}
+		}
+	}
+	reviews(pagination: $pagination) {
+		data {
+			attributes {
+				name
+				createdAt
+				content
+				rating
+			}
+		}
+	}
+}
