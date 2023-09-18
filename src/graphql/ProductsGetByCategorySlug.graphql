@@ -1,0 +1,7 @@
+query ProductsGetByCategorySlug($filters: CategoryFiltersInput) {
+	categories(filters: $filters) {
+		data {
+			...CategoryListProductItemFragment
+		}
+	}
+}

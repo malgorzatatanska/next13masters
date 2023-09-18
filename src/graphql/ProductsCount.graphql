@@ -1,0 +1,9 @@
+query ProductsCount {
+	products {
+		meta {
+			pagination {
+				total
+			}
+		}
+	}
+}
