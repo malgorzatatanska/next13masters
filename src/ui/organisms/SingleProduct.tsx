@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { type SingleProductFragmentFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
@@ -33,7 +34,17 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
 					<div className="font pb-5 text-2xl leading-snug tracking-wide text-gray-500 lg:text-xl">
 						{product.description}
 					</div>
-					<article className="prose lg:prose-xl">opis</article>
+					{product.collections?.data[0]?.attributes?.slug && (
+						<div className="font text-base text-gray-600">
+							Collections:{" "}
+							<Link
+								href={`/collections/${product.collections?.data[0]?.attributes?.slug}`}
+								className="underline"
+							>
+								{product.collections?.data[0]?.attributes?.name}
+							</Link>
+						</div>
+					)}
 				</div>
 				<div>
 					<div

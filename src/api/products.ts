@@ -1,6 +1,7 @@
 import { loadEnvConfig } from "@next/env";
 import { executeGraphql } from "./graphqlApi";
 import {
+	CollectionsGetBySlugDocument,
 	CountCategoryProductsCountDocument,
 	GetProductByIdDocument,
 	GetProductListDocument,
@@ -38,6 +39,21 @@ export const getProductByCategorySlug = async (
 	);
 
 	return categories.categories?.data[0]?.attributes?.products?.data;
+};
+
+export const getCollectionBySlug = async (collectionSlug: string) => {
+	const collection = await executeGraphql(
+		CollectionsGetBySlugDocument,
+		{
+			filters: {
+				slug: {
+					eq: collectionSlug,
+				},
+			},
+		},
+	);
+
+	return collection.collections?.data[0]?.attributes;
 };
 
 export const getProductsCount = async (): Promise<number> => {

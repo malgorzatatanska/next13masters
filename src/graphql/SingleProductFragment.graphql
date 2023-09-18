@@ -30,4 +30,13 @@ fragment SingleProductFragment on Product {
 			}
 		}
 	}
+	collections {
+		data {
+			id
+			attributes {
+				name
+				slug
+			}
+		}
+	}
 }

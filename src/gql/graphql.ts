@@ -1514,6 +1514,13 @@ export type UsersPermissionsUserRelationResponseCollection = {
 
 export type CategoryListProductItemFragmentFragment = { attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null };
 
+export type CollectionsGetBySlugQueryVariables = Exact<{
+  filters?: InputMaybe<CollectionFiltersInput>;
+}>;
+
+
+export type CollectionsGetBySlugQuery = { collections?: { data: Array<{ id?: string | null, attributes?: { name: string, description?: string | null, image?: { data?: { attributes?: { url: string, width?: number | null, height?: number | null } | null } | null } | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null }> } | null };
+
 export type CountCategoryProductsCountQueryVariables = Exact<{
   filters?: InputMaybe<CategoryFiltersInput>;
 }>;
@@ -1527,7 +1534,7 @@ export type GetProductByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetProductByIdQuery = { product?: { data?: { attributes?: { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null } | null } | null } | null };
+export type GetProductByIdQuery = { product?: { data?: { attributes?: { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null, collections?: { data: Array<{ id?: string | null, attributes?: { name: string, slug: string } | null }> } | null } | null } | null } | null };
 
 export type GetProductListQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
@@ -1551,7 +1558,7 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 
 export type ProductsGetByCategorySlugQuery = { categories?: { data: Array<{ id?: string | null, attributes?: { name: string, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null }> } | null };
 
-export type SingleProductFragmentFragment = { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null };
+export type SingleProductFragmentFragment = { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null, collections?: { data: Array<{ id?: string | null, attributes?: { name: string, slug: string } | null }> } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -1667,8 +1674,69 @@ export const SingleProductFragmentFragmentDoc = new TypedDocumentString(`
       }
     }
   }
+  collections {
+    data {
+      id
+      attributes {
+        name
+        slug
+      }
+    }
+  }
 }
     `, {"fragmentName":"SingleProductFragment"}) as unknown as TypedDocumentString<SingleProductFragmentFragment, unknown>;
+export const CollectionsGetBySlugDocument = new TypedDocumentString(`
+    query CollectionsGetBySlug($filters: CollectionFiltersInput) {
+  collections(filters: $filters) {
+    data {
+      id
+      attributes {
+        name
+        image {
+          data {
+            attributes {
+              url
+              width
+              height
+            }
+          }
+        }
+        description
+        products {
+          data {
+            ...ProductListItemFragment
+          }
+        }
+      }
+    }
+  }
+}
+    fragment ProductListItemFragment on ProductEntity {
+  id
+  attributes {
+    name
+    price
+    slug
+    description
+    images {
+      data {
+        attributes {
+          height
+          width
+          url
+        }
+      }
+    }
+    categories {
+      data {
+        attributes {
+          slug
+          name
+        }
+      }
+    }
+  }
+}`) as unknown as TypedDocumentString<CollectionsGetBySlugQuery, CollectionsGetBySlugQueryVariables>;
 export const CountCategoryProductsCountDocument = new TypedDocumentString(`
     query CountCategoryProductsCount($filters: CategoryFiltersInput) {
   categories(filters: $filters) {
@@ -1723,6 +1791,15 @@ export const GetProductByIdDocument = new TypedDocumentString(`
         createdAt
         content
         rating
+      }
+    }
+  }
+  collections {
+    data {
+      id
+      attributes {
+        name
+        slug
       }
     }
   }
