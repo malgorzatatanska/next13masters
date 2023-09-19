@@ -1,13 +1,17 @@
 import { ProductList } from "./ProductList";
-import { getProductsList } from "@/api/products";
+import { getProductByCategorySlug } from "@/api/products";
 
-const sleep = (ms: number) =>
-	new Promise((resolve) => setTimeout(resolve, ms));
+type SuggestedProductsProps = {
+	categorySlug: string;
+};
 
-export const SuggestedProductsList = async () => {
-	const products = await getProductsList({ take: "4", offset: "0" });
+export const SuggestedProductsList = async ({
+	categorySlug,
+}: SuggestedProductsProps) => {
+	// const products = await getProductsList("1");
+	const products = await getProductByCategorySlug(categorySlug, "1");
 
-	await sleep(5000);
+	if (!products) return [];
 
 	return <ProductList products={products} />;
 };

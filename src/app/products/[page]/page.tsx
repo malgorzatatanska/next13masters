@@ -21,8 +21,6 @@ export default async function ProductsPage({
 }: {
 	params: { page: string };
 }) {
-	// const offset = (Number(params.page) - 1) * 4;
-
 	const productsList = await getProductsList(params.page);
 
 	if (!productsList) {

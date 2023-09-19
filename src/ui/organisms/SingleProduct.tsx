@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProductsAttribiutes } from "../atoms/ProductsAttribiutes";
 import { type SingleProductFragmentFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
@@ -46,6 +47,7 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
 						</div>
 					)}
 				</div>
+				<ProductsAttribiutes />
 				<div>
 					<div
 						data-testid="add-to-cart"

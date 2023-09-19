@@ -54,11 +54,18 @@ export default async function Product({
 				<SingleProduct product={product} />
 			</div>
 			<aside>
-				<Suspense fallback="Loading ...">
-					<div className="mx-auto max-w-2xl">
-						<SuggestedProductsList />
-					</div>
-				</Suspense>
+				<div className="mx-auto max-w-2xl text-gray-500">
+					<Suspense fallback="Loading ...">
+						<div className="mx-auto max-w-2xl">
+							<p>Suggested products</p>
+							<SuggestedProductsList
+								categorySlug={
+									product.categories?.data[0]?.attributes?.slug || ""
+								}
+							/>
+						</div>
+					</Suspense>
+				</div>
 			</aside>
 		</>
 	);
