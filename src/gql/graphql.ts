@@ -1558,6 +1558,13 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 
 export type ProductsGetByCategorySlugQuery = { categories?: { data: Array<{ id?: string | null, attributes?: { name: string, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null }> } | null };
 
+export type SearchProductsQueryVariables = Exact<{
+  filters?: InputMaybe<ProductFiltersInput>;
+}>;
+
+
+export type SearchProductsQuery = { products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null };
+
 export type SingleProductFragmentFragment = { name: string, price: number, slug: string, description?: string | null, categories?: { data: Array<{ attributes?: { name: string, slug: string } | null }> } | null, images?: { data: Array<{ attributes?: { url: string, height?: number | null, width?: number | null } | null }> } | null, reviews?: { data: Array<{ attributes?: { name: string, createdAt?: unknown | null, content: string, rating: number } | null }> } | null, collections?: { data: Array<{ id?: string | null, attributes?: { name: string, slug: string } | null }> } | null };
 
 export class TypedDocumentString<TResult, TVariables>
@@ -1891,3 +1898,37 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     }
   }
 }`) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
+export const SearchProductsDocument = new TypedDocumentString(`
+    query SearchProducts($filters: ProductFiltersInput) {
+  products(filters: $filters) {
+    data {
+      ...ProductListItemFragment
+    }
+  }
+}
+    fragment ProductListItemFragment on ProductEntity {
+  id
+  attributes {
+    name
+    price
+    slug
+    description
+    images {
+      data {
+        attributes {
+          height
+          width
+          url
+        }
+      }
+    }
+    categories {
+      data {
+        attributes {
+          slug
+          name
+        }
+      }
+    }
+  }
+}`) as unknown as TypedDocumentString<SearchProductsQuery, SearchProductsQueryVariables>;

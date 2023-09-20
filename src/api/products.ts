@@ -7,6 +7,7 @@ import {
 	GetProductListDocument,
 	ProductsCountDocument,
 	ProductsGetByCategorySlugDocument,
+	SearchProductsDocument,
 } from "@/gql/graphql";
 
 loadEnvConfig(process.cwd());
@@ -101,6 +102,21 @@ export const getProductsList = async (pageNumber: string) => {
 	}
 
 	return graphqlResonse.products.data;
+};
+
+export const getSearchProducts = async (searchValue: string) => {
+	const searchResponse = await executeGraphql(
+		SearchProductsDocument,
+		{
+			filters: {
+				name: {
+					contains: searchValue,
+				},
+			},
+		},
+	);
+
+	return searchResponse.products?.data;
 };
 
 // const productResponseItemToProductItemType = (

@@ -22,9 +22,6 @@ export const CollectionListItem = ({
 				<h2 className="title-font mb-4 text-lg font-medium text-gray-900">
 					{product.attributes?.name}
 				</h2>
-				<p className="text-base leading-relaxed">
-					{product.attributes?.description}
-				</p>
 			</div>
 		</div>
 	);

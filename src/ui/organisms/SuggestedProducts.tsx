@@ -8,7 +8,6 @@ type SuggestedProductsProps = {
 export const SuggestedProductsList = async ({
 	categorySlug,
 }: SuggestedProductsProps) => {
-	// const products = await getProductsList("1");
 	const products = await getProductByCategorySlug(categorySlug, "1");
 
 	if (!products) return [];
