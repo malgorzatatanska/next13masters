@@ -1,11 +1,12 @@
-import { getProductsList } from "@/api/products";
+import { notFound } from "next/navigation";
+import { getProductsCount, getProductsList } from "@/api/products";
 import { numberOfProductsOnThePage } from "@/ui/consts";
 import { ProductList } from "@/ui/organisms/ProductList";
 
 export const generateStaticParams = async () => {
-	const products = await getProductsList({});
+	const products = await getProductsCount();
 	const pages = Math.ceil(
-		products.length / Number(numberOfProductsOnThePage),
+		products / Number(numberOfProductsOnThePage),
 	);
 
 	const pagesList = Array.from({ length: pages }, (_, i) => ({
@@ -20,12 +21,11 @@ export default async function ProductsPage({
 }: {
 	params: { page: string };
 }) {
-	const offset = (Number(params.page) - 1) * 4;
+	const productsList = await getProductsList(params.page);
 
-	const productsList = await getProductsList({
-		take: numberOfProductsOnThePage,
-		offset: offset.toString(),
-	});
+	if (!productsList) {
+		return notFound();
+	}
 
 	return (
 		<div className="mx-auto text-gray-500">

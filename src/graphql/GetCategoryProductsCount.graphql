@@ -1,0 +1,23 @@
+# query CountCategoryProductsCount($filters: CategoryFiltersInput) {
+# 	categories(filters: $filters) {
+# 		meta {
+# 			pagination {
+# 				total
+# 			}
+# 		}
+# 	}
+# }
+
+query CountCategoryProductsCount($filters: CategoryFiltersInput) {
+	categories(filters: $filters) {
+		data {
+			attributes {
+				products {
+					data {
+						id
+					}
+				}
+			}
+		}
+	}
+}

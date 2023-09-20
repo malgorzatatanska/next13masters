@@ -1,0 +1,23 @@
+# query GetProductList(
+# 	$pagination: PaginationArg
+# 	$productsPagination: PaginationArg
+# ) {
+# 	products(pagination: $productsPagination) {
+# 		data {
+# 			attributes {
+# 				name
+# 				price
+# 				slug
+# 				description
+# 			}
+# 		}
+# 	}
+# }
+
+query GetProductList($pagination: PaginationArg) {
+	products(pagination: $pagination) {
+		data {
+			...ProductListItemFragment
+		}
+	}
+}

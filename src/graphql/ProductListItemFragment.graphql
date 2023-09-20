@@ -1,0 +1,50 @@
+# fragment ProductListItemFragment on Product {
+# 	name
+# 	description
+# 	categories {
+# 		data {
+# 			attributes {
+# 				name
+# 				slug
+# 			}
+# 		}
+# 	}
+# 	price
+# 	slug
+# 	images {
+# 		data {
+# 			attributes {
+# 				url
+# 				width
+# 				height
+# 			}
+# 		}
+# 	}
+# }
+
+fragment ProductListItemFragment on ProductEntity {
+	id
+	attributes {
+		name
+		price
+		slug
+		description
+		images {
+			data {
+				attributes {
+					height
+					width
+					url
+				}
+			}
+		}
+		categories {
+			data {
+				attributes {
+					slug
+					name
+				}
+			}
+		}
+	}
+}

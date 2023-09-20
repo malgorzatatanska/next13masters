@@ -1,0 +1,9 @@
+query GetProductById($productId: ID, $pagination: PaginationArg) {
+	product(id: $productId) {
+		data {
+			attributes {
+				...SingleProductFragment
+			}
+		}
+	}
+}

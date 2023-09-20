@@ -1,0 +1,7 @@
+query SearchProducts($filters: ProductFiltersInput) {
+	products(filters: $filters) {
+		data {
+			...ProductListItemFragment
+		}
+	}
+}

@@ -1,8 +1,10 @@
-import { type ProductItemType } from "../types";
+import Link from "next/link";
+import { ProductsAttribiutes } from "../atoms/ProductsAttribiutes";
+import { type SingleProductFragmentFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
 type SingleProductProps = {
-	product: ProductItemType;
+	product: SingleProductFragmentFragment;
 };
 
 export const SingleProduct = ({ product }: SingleProductProps) => {
@@ -11,10 +13,13 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
 			<div className="relative flex w-full pl-10 sm:w-1/2 sm:max-w-md ">
 				<div className="relative h-52 w-52 border-8 border-white lg:h-96 lg:w-96">
 					<img
-						src={product.coverImage.src}
-						width="320"
-						height="320"
-						alt={product.coverImage.alt || ""}
+						src={
+							`${process.env.SERVER_URL}${product.images?.data[0]?.attributes?.url}` ||
+							""
+						}
+						width={product.images?.data[0]?.attributes?.width || ""}
+						height={product.images?.data[0]?.attributes?.height || ""}
+						alt={product.name || ""}
 						className="h-full w-full object-cover object-center transition duration-500 hover:scale-110"
 					/>
 				</div>
@@ -30,8 +35,19 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
 					<div className="font pb-5 text-2xl leading-snug tracking-wide text-gray-500 lg:text-xl">
 						{product.description}
 					</div>
-					<article className="prose lg:prose-xl">opis</article>
+					{product.collections?.data[0]?.attributes?.slug && (
+						<div className="font text-base text-gray-600">
+							Collections:{" "}
+							<Link
+								href={`/collections/${product.collections?.data[0]?.attributes?.slug}`}
+								className="underline"
+							>
+								{product.collections?.data[0]?.attributes?.name}
+							</Link>
+						</div>
+					)}
 				</div>
+				<ProductsAttribiutes />
 				<div>
 					<div
 						data-testid="add-to-cart"

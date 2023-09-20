@@ -7,12 +7,15 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint --fix --dir src"
+		"lint": "next lint --fix --dir src",
+		"codegen": "graphql-codegen --config .graphqlrc.ts"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^3.3.1",
 		"@mdx-js/loader": "^2.3.0",
 		"@mdx-js/react": "^2.3.0",
 		"@next/mdx": "^13.4.19",
+		"@parcel/watcher": "^2.3.0",
 		"@types/mdx": "^2.0.7",
 		"@types/node": "20.5.9",
 		"@types/react": "18.2.21",
@@ -21,15 +24,23 @@
 		"clsx": "^2.0.0",
 		"eslint": "8.48.0",
 		"eslint-config-next": "13.4.19",
+		"graphql": "^16.8.0",
+		"lucide-react": "^0.277.0",
 		"next": "13.4.19",
 		"postcss": "8.4.29",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
+		"react-hook-form": "^7.46.1",
 		"react-icons": "^4.11.0",
 		"tailwindcss": "3.3.3",
-		"typescript": "5.2.2"
+		"typescript": "5.2.2",
+		"yup": "^1.2.0"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "5.0.0",
+		"@graphql-codegen/client-preset": "4.1.0",
+		"@graphql-typed-document-node/core": "^3.2.0",
+		"@next/env": "^13.4.19",
 		"@tailwindcss/typography": "^0.5.10",
 		"@typescript-eslint/eslint-plugin": "^6.6.0",
 		"@typescript-eslint/parser": "^6.6.0",

@@ -1,0 +1,26 @@
+# query ProductsGetByCategorySlug($filters: CategoryFiltersInput) {
+# 	categories(filters: $filters) {
+# 		data {
+# 			...CategoryListProductItemFragment
+# 		}
+# 	}
+# }
+
+query ProductsGetByCategorySlug(
+	$filters: CategoryFiltersInput!
+	$pagination: PaginationArg
+) {
+	categories(filters: $filters) {
+		data {
+			id
+			attributes {
+				name
+				products(pagination: $pagination) {
+					data {
+						...ProductListItemFragment
+					}
+				}
+			}
+		}
+	}
+}
