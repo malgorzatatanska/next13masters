@@ -61,6 +61,7 @@ export const Search = () => {
 					{...register("search")}
 					onChange={(e) => setSearch(e.target.value)}
 					onKeyDown={handleEnter}
+					role="searchbox"
 				/>
 				<div className="hidden sm:flex">
 					<button className="rounded-md bg-pink-300 px-5 py-2.5 text-sm font-medium text-white shadow">
