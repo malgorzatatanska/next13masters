@@ -1514,6 +1514,13 @@ export type UsersPermissionsUserRelationResponseCollection = {
 
 export type CategoryListProductItemFragmentFragment = { attributes?: { name: string, slug: string, description?: string | null, products?: { data: Array<{ id?: string | null, attributes?: { name: string, price: number, slug: string, description?: string | null, images?: { data: Array<{ attributes?: { height?: number | null, width?: number | null, url: string } | null }> } | null, categories?: { data: Array<{ attributes?: { slug: string, name: string } | null }> } | null } | null }> } | null } | null };
 
+export type CollectionFragmentFragment = { name: string, slug: string, image?: { data?: { attributes?: { url: string, width?: number | null, height?: number | null } | null } | null } | null };
+
+export type CollectionGetListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CollectionGetListQuery = { collections?: { data: Array<{ attributes?: { name: string, slug: string, image?: { data?: { attributes?: { url: string, width?: number | null, height?: number | null } | null } | null } | null } | null }> } | null };
+
 export type CollectionsGetBySlugQueryVariables = Exact<{
   filters?: InputMaybe<CollectionFiltersInput>;
 }>;
@@ -1648,6 +1655,21 @@ export const CategoryListProductItemFragmentFragmentDoc = new TypedDocumentStrin
     }
   }
 }`, {"fragmentName":"CategoryListProductItemFragment"}) as unknown as TypedDocumentString<CategoryListProductItemFragmentFragment, unknown>;
+export const CollectionFragmentFragmentDoc = new TypedDocumentString(`
+    fragment CollectionFragment on Collection {
+  name
+  slug
+  image {
+    data {
+      attributes {
+        url
+        width
+        height
+      }
+    }
+  }
+}
+    `, {"fragmentName":"CollectionFragment"}) as unknown as TypedDocumentString<CollectionFragmentFragment, unknown>;
 export const SingleProductFragmentFragmentDoc = new TypedDocumentString(`
     fragment SingleProductFragment on Product {
   categories {
@@ -1692,6 +1714,29 @@ export const SingleProductFragmentFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"SingleProductFragment"}) as unknown as TypedDocumentString<SingleProductFragmentFragment, unknown>;
+export const CollectionGetListDocument = new TypedDocumentString(`
+    query CollectionGetList {
+  collections {
+    data {
+      attributes {
+        ...CollectionFragment
+      }
+    }
+  }
+}
+    fragment CollectionFragment on Collection {
+  name
+  slug
+  image {
+    data {
+      attributes {
+        url
+        width
+        height
+      }
+    }
+  }
+}`) as unknown as TypedDocumentString<CollectionGetListQuery, CollectionGetListQueryVariables>;
 export const CollectionsGetBySlugDocument = new TypedDocumentString(`
     query CollectionsGetBySlug($filters: CollectionFiltersInput) {
   collections(filters: $filters) {

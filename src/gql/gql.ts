@@ -15,6 +15,8 @@ import * as types from './graphql';
  */
 const documents = {
     "fragment CategoryListProductItemFragment on CategoryEntity {\n  attributes {\n    name\n    slug\n    description\n    products {\n      data {\n        ...ProductListItemFragment\n      }\n    }\n  }\n}": types.CategoryListProductItemFragmentFragmentDoc,
+    "fragment CollectionFragment on Collection {\n  name\n  slug\n  image {\n    data {\n      attributes {\n        url\n        width\n        height\n      }\n    }\n  }\n}": types.CollectionFragmentFragmentDoc,
+    "query CollectionGetList {\n  collections {\n    data {\n      attributes {\n        ...CollectionFragment\n      }\n    }\n  }\n}": types.CollectionGetListDocument,
     "query CollectionsGetBySlug($filters: CollectionFiltersInput) {\n  collections(filters: $filters) {\n    data {\n      id\n      attributes {\n        name\n        image {\n          data {\n            attributes {\n              url\n              width\n              height\n            }\n          }\n        }\n        description\n        products {\n          data {\n            ...ProductListItemFragment\n          }\n        }\n      }\n    }\n  }\n}": types.CollectionsGetBySlugDocument,
     "query CountCategoryProductsCount($filters: CategoryFiltersInput) {\n  categories(filters: $filters) {\n    data {\n      attributes {\n        products {\n          data {\n            id\n          }\n        }\n      }\n    }\n  }\n}": types.CountCategoryProductsCountDocument,
     "query GetProductById($productId: ID, $pagination: PaginationArg) {\n  product(id: $productId) {\n    data {\n      attributes {\n        ...SingleProductFragment\n      }\n    }\n  }\n}": types.GetProductByIdDocument,
@@ -30,6 +32,14 @@ const documents = {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "fragment CategoryListProductItemFragment on CategoryEntity {\n  attributes {\n    name\n    slug\n    description\n    products {\n      data {\n        ...ProductListItemFragment\n      }\n    }\n  }\n}"): typeof import('./graphql').CategoryListProductItemFragmentFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment CollectionFragment on Collection {\n  name\n  slug\n  image {\n    data {\n      attributes {\n        url\n        width\n        height\n      }\n    }\n  }\n}"): typeof import('./graphql').CollectionFragmentFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query CollectionGetList {\n  collections {\n    data {\n      attributes {\n        ...CollectionFragment\n      }\n    }\n  }\n}"): typeof import('./graphql').CollectionGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

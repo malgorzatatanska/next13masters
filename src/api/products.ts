@@ -1,6 +1,7 @@
 import { loadEnvConfig } from "@next/env";
 import { executeGraphql } from "./graphqlApi";
 import {
+	CollectionGetListDocument,
 	CollectionsGetBySlugDocument,
 	CountCategoryProductsCountDocument,
 	GetProductByIdDocument,
@@ -117,6 +118,19 @@ export const getSearchProducts = async (searchValue: string) => {
 	);
 
 	return searchResponse.products?.data;
+};
+
+export const getCollectionList = async () => {
+	const collectionsResponse = await executeGraphql(
+		CollectionGetListDocument,
+		{},
+	);
+
+	if (!collectionsResponse) {
+		return [];
+	}
+
+	return collectionsResponse.collections?.data || [];
 };
 
 // const productResponseItemToProductItemType = (

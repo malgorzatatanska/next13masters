@@ -1,0 +1,9 @@
+query CollectionGetList {
+	collections {
+		data {
+			attributes {
+				...CollectionFragment
+			}
+		}
+	}
+}

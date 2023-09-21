@@ -12,5 +12,9 @@ export const SuggestedProductsList = async ({
 
 	if (!products) return [];
 
-	return <ProductList products={products} />;
+	return (
+		<div data-testid="related-products">
+			<ProductList products={products} />
+		</div>
+	);
 };
