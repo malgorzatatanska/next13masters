@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { CollectionList } from "@/ui/organisms/CollectionList";
 
 export default function Home() {
 	return (
@@ -84,6 +85,9 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div className="mx-auto mt-20 flex max-w-7xl justify-center text-gray-400">
+					<CollectionList />
 				</div>
 			</div>
 		</>
